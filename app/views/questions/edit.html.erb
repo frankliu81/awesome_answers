@@ -1,0 +1,28 @@
+<h1>Edit Question</h1>
+
+<%= @question.errors.full_messages.join(", ") %>
+
+<%# if you give the 'form_for' helper an ActiveRecord object that is persisted
+(it was something we found from the database), the generated form will have
+an action that submits to 'question_path(@question)' where @question is
+the ActiveRecord object that you passed to the form.  it goes to question_path
+instead of questions_path, because we are going to a specific question.
+The action will be PATCH (using the _method wordaround).  MethodOverride
+and hidden field _method are automatically done by Rails %>
+<%= form_for @question do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%# by using f.text_field :title, if @question has a value for the attributes
+    'title' it will populate the field with that value.  This is usually the
+    case when redisplaing the form after an error occurs %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <%= f.submit %>
+
+<% end %>

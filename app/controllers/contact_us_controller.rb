@@ -6,10 +6,10 @@ class ContactUsController < ApplicationController
     Rails.logger.info ">>>>>>>>>>>>>>>>>>>>"
     Rails.logger.info ">>>>>>>>>>>>>>>>>>>>"
     # most ruby object will implement inspect
-    Rails.logger request.inspect
+    Rails.logger.info request.inspect
     # request comes from ActionDispatch
-    Rails.logger request.path
-    render :new, layout: "special";
+    Rails.logger.info request.path
+    # render :new, layout: "special";
   end
 
   # we defined this as the action in the route "contat_us#create"

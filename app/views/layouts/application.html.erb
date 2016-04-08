@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Welcome Awesome Answers</title>
+  <title>Awesome Answers</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
   <%#= home_path %>
@@ -28,6 +29,10 @@
   |
   <%# rails/info/routes or bin/rake routes%>
   <%= link_to "Contact Us", contact_us_path %>
+  |
+  <%= link_to "New Question", new_question_path %>
+  |
+  <%= link_to "All Questions", questions_path %>
   <hr>
 <%= yield %>
 

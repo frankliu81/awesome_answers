@@ -21,6 +21,28 @@ Rails.application.routes.draw do
                                             # method as the route above because
                                             # they have the same URL "/contact_us"
 
+
+  # # questions routes, intro to crud
+  # get "/questions/new"        => "questions#new"    , as: :new_question
+  # post "/questions"           => "questions#create" , as: :questions
+  #
+  # # following REST standard, it is best to include id in the URL
+  # get "/questions/:id"        => "questions#show"   , as: :question
+  #
+  # # i have already defined the helper for /questions for the post, no need to
+  # # define it
+  # get "/questions"            => "questions#index"
+  #
+  # # if i want to show a question to edit, i need question id
+  # get "/questions/:id/edit"   => "questions#edit"   , as: :edit_question
+  #
+  # patch "questions/:id"       => "questions#update"
+  #
+  # delete "/questions/:id"     => "questions#destroy"
+
+  # shortchut, it generated the shortcuts by convention
+  resources :questions
+
   # Routes exercise
   # new (doesn't save anything, ask for a form)
   # create
@@ -30,6 +52,7 @@ Rails.application.routes.draw do
   # show, get one
   # destroy
   # create question controller, put a delete method
+
   delete "/question/:id" => "questions#delete",  as: :delete_question
 
   get "/questions/:id/edit" => "questions#edit"

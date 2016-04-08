@@ -18,10 +18,11 @@ class Question < ActiveRecord::Base
   # itself doesn't have to be unique but the combination of the two must
   # be unique
 
-  # validstes ;title, uniqueness: {scope: [:body, :view_count]}
+  # combination must be unique
+  # validate ;title, uniqueness: {scope: [:body, :view_count]}
   validates :title, uniqueness: {scope: :body}
 
-  # :no_money
+  # :no_monkey custom validator, NOTE: 'validate' instead of 'validates'
   validate :no_monkey
 
   # this will call the 'set_defaults' method right after the initialize phase
@@ -51,7 +52,7 @@ class Question < ActiveRecord::Base
 
   def self.search(search_term)
     #where(["title ILIKE?", "#{string}"])
-    # my solution
+    # my solution of searching in the title or body for a string contained within
     # feature in rails use prepare statement, prepare by default will
     # sanitize the escape characters, before passing into SQL
     where(["title ILIKE? OR body ILIKE?", "%#{search_term}%", "%#{search_term}%"])
