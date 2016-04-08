@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+100.times do
+  q = Question.create  title: Faker::Company.bs,
+                      body: Faker::Lorem.paragraph,
+                      view_count: 0
+end
+
+puts Cowsay.say("Generated a 100 quesitons!")

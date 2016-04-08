@@ -5,12 +5,63 @@ Rails.application.routes.draw do
   # method call get, that takes in an argument which is a hash
   #get ({"/home" => "wecome#index"})
   # if we don't speicfy a helper method name it will default in this case
-  # to 'home_path' and 'home'
+  # to 'home_path' and 'home_url'
 
   get "/home" => "welcome#index"
 
-# for this route we will have helper methods: about_us_path and about_us_url
+  # for this route we will have helper methods: about_us_path and about_us_url
+  # that maps to "/about" and "/about" can be change to anything
+  # and it will still work
   get "/about" => "welcome#about",  as: :about_us
+
+  # routes are just rules
+  get "/contact_us" => "contact_us#new"
+
+  post "/contact_us" => "contact_us#create" # this will have the same helper
+                                            # method as the route above because
+                                            # they have the same URL "/contact_us"
+
+  # Routes exercise
+  # new (doesn't save anything, ask for a form)
+  # create
+  # edit (ask for the form)
+  # update
+  # index, get all
+  # show, get one
+  # destroy
+  # create question controller, put a delete method
+  delete "/question/:id" => "questions#delete",  as: :delete_question
+
+  get "/questions/:id/edit" => "questions#edit"
+
+  get "/questions/:id" => "questions#show"
+
+  post "/questions/:id/comments" => "comments#create"
+
+  get "/faq" => "home#faq"
+
+  # manually do the path to controller in a folder
+  #get "/admin/questions" => "admin/questions#index"
+
+  # http://guides.rubyonrails.org/routing.html
+  # automatically do the path to controller in a folder
+  # namespace :admin do
+  # 	#resources :questions, only: [:index]
+  #   resources :questions
+  # end
+
+  # alternatively, do the path differently
+  #get "/admin/questions" => "questions#index"
+
+  # automatically
+  scope '/admin' do
+    resources :questions
+  end
+
+  # this defines the 'root' or home page or our applicaiton to go to the
+  # WelcomeController with 'index' action.  We will have access to
+  # the helper# methods: root_path and root_url
+  root "welcome#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
