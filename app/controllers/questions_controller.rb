@@ -1,5 +1,17 @@
 class QuestionsController < ApplicationController
 
+  # defining a method in as a 'before_action' will make it so that Rails
+  # exectues that method before executing the action.  This is still within
+  # the same request cycle
+
+  # find_question is not an actual action, it can be private
+  # you can give the 'before_action' method two options: :only or :except
+  # this will help you limit the actions which the 'find_question'method will
+  # be exectued before.
+  # in the code below 'find_quesiton' will only be executed before: show, edit
+  # update and destroy actions
+  before_action :find_question, only: [:show, :edit, :update, :destroy]
+
   def new
     # we need to define a new 'Question' object in order to be able to
     # properly generate a form in Rails
@@ -29,10 +41,12 @@ class QuestionsController < ApplicationController
 
     # method 4 - strong parameters gem, part of Rails
     # other attributes not in permit would be ignored
-    questions_params = params.require(:question).permit([:title, :body])
+    #questions_params = params.require(:question).permit([:title, :body])
+
     @question = Question.new(questions_params)
 
     if @question.save
+      flash[:notice] = "Question created!"
       #render text: "SUCCESS"
       # render :show will give take you to /questions
       # render :show
@@ -40,6 +54,7 @@ class QuestionsController < ApplicationController
       redirect_to question_path(@question)
 
     else
+      flash[:alert] = "Question didn't save!"
       # this will render 'app/views/questions/new.html.erb' because the default
       # in this section is to render the create, we did not have a create
       render :new
@@ -50,7 +65,6 @@ class QuestionsController < ApplicationController
   # we receive a request such as: GET /questions/56
   # params[:id] will be '56'
   def show
-    @question = Question.find params[:id]
   end
 
   def index
@@ -59,15 +73,15 @@ class QuestionsController < ApplicationController
 
   def edit
     # we need to find the question in order to edit it
-    @question = Question.find params[:id]
   end
 
   def update
-    @question = Question.find params[:id]
-    # we need similar technique with strong parameters
-    question_params = params.require(:question).permit(:title, :body)
+
     if @question.update question_params
-      redirect_to question_path(@question)
+      # flash messages can be set either direclty using:
+      #flash[:notice] = "..".  you can also pass a ':notice' or ':alert' options
+      #to the 'redirect_to' method.
+      redirect_to question_path(@question), notice: "Quesiton updated!"
     else
       # the bad value you enter will temporarily stay, it is a feature
       # of active record
@@ -77,10 +91,10 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find params[:id]
+
     @question.destroy
     # do confirmation pop-up, redirect to index
-    redirect_to questions_path
+    redirect_to questions_path, notice: "Question deleted!"
   end
 
   # from the routing assignment
@@ -103,5 +117,16 @@ class QuestionsController < ApplicationController
   #   render text: "questions#show id=#{params[:id]}"
   # end
 
+  private
+
+  # instance variable accessible, processed within the same request cycle
+  def find_question
+    @question = Question.find params[:id]
+  end
+
+  # local variable and local variable are the same
+  def questions_params
+    params.require(:question).permit(:title, :body)
+  end
 
 end

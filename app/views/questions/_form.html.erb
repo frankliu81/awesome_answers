@@ -1,0 +1,56 @@
+<%# this file '_form.html.erb' is considered to be a partial which means you can include
+it in any other template (such as new.html.erb and edit.html.erb)
+you must start the partial name with '_'.  Partials have access to the same
+instance variables available in the templates (e.g. @question) %>
+
+
+<%= @question.errors.full_messages.join(", ") %>
+
+
+<%# comments for new %>
+
+  <%# form_for is a Rails helper method that accespt an ActiveRecord object
+  as the first argument.
+  if @question is not persisted in the database (just in memory, no id),
+  form_for makes the 'action' of the form go to 'questions_path'
+  and it will make the 'method' of the form post. %>
+
+  <%# by using f.text_field :title, if @question has a value for the attributes
+  'title' it will populate the field with that value.  This is usually the
+  case when redisplaing the form after an error occurs %>
+
+
+<%# comments for edit %>
+
+  <%# if you give the 'form_for' helper an ActiveRecord object that is persisted
+  (it was something we found from the database), the generated form will have
+  an action that submits to 'question_path(@question)' where @question is
+  the ActiveRecord object that you passed to the form.  it goes to question_path
+  instead of questions_path, because we are going to a specific question.
+  The action will be PATCH (using the _method wordaround).  MethodOverride
+  and hidden field _method are automatically done by Rails %>
+
+  <%# If the @question is not persisted for form_for, it will not have the pre-populated field.
+  Post for the method, action questions_path
+
+  If the @question is persisted, it will use the hidden path to generate a patch
+  it will be question_path(@question) (ie. question_path\:id)
+   %>
+
+<%= form_for @question do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%# by using f.text_field :title, if @question has a value for the attributes
+    'title' it will populate the field with that value.  This is usually the
+    case when redisplaing the form after an error occurs %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <%= f.submit %>
+
+<% end %>

@@ -34,6 +34,11 @@
   |
   <%= link_to "All Questions", questions_path %>
   <hr>
+  <%= flash[:notice] || flash[:alert] %>
+  <%#= notice || alert %>
+
+  <hr>
+
 <%= yield %>
 
 </body>

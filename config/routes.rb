@@ -53,15 +53,15 @@ Rails.application.routes.draw do
   # destroy
   # create question controller, put a delete method
 
-  delete "/question/:id" => "questions#delete",  as: :delete_question
-
-  get "/questions/:id/edit" => "questions#edit"
-
-  get "/questions/:id" => "questions#show"
-
-  post "/questions/:id/comments" => "comments#create"
-
-  get "/faq" => "home#faq"
+  # delete "/questions/:id" => "questions#delete",  as: :delete_question
+  #
+  # get "/questions/:id/edit" => "questions#edit"
+  #
+  # get "/questions/:id" => "questions#show"
+  #
+  # post "/questions/:id/comments" => "comments#create"
+  #
+  # get "/faq" => "home#faq"
 
   # manually do the path to controller in a folder
   #get "/admin/questions" => "admin/questions#index"
