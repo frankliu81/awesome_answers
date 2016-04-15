@@ -65,6 +65,7 @@ class QuestionsController < ApplicationController
   # we receive a request such as: GET /questions/56
   # params[:id] will be '56'
   def show
+    @answer = Answer.new
   end
 
   def index
@@ -77,7 +78,7 @@ class QuestionsController < ApplicationController
 
   def update
 
-    if @question.update question_params
+    if @question.update questions_params
       # flash messages can be set either direclty using:
       #flash[:notice] = "..".  you can also pass a ':notice' or ':alert' options
       #to the 'redirect_to' method.
@@ -126,7 +127,8 @@ class QuestionsController < ApplicationController
 
   # local variable and local variable are the same
   def questions_params
-    params.require(:question).permit(:title, :body)
+    # strong parameters, prevent user from injecting unwanted parameters
+    params.require(:question).permit(:title, :body, :category_id)
   end
 
 end

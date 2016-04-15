@@ -43,6 +43,32 @@ Rails.application.routes.draw do
   # shortchut, it generated the shortcuts by convention
   resources :questions
 
+  # example of adding search routes
+  # in rails/info/Routes
+  # search_questions_path, path /questions/search (.:format) html, JSON
+    # when you want to have a url that is not specific to one record
+    # it returns a collection
+  # search_question_path /questions/:id/search
+    # similar to editing a specific question, searching within a question's detail
+  # question_search_path
+    # nested resource, something that is not directly related to question_search_path
+    # but it is nested, you are not doing something specific to a question
+    # but you are referencing a question
+  # resources :questions do
+  #   get :search, on: :collection
+  #   get :search, on: :member
+  #   get :search
+  # end
+
+  # the answers routes will be the standard ones prefixed within
+  # /questions/:question_id
+  # this way when we want to create an answer we know the question it references
+  # all the helpers will be the same as befor prefixed with 'question_'
+
+  resources :questions do
+    resources :answers, only: [:create, :destroy]
+  end
+
   # Routes exercise
   # new (doesn't save anything, ask for a form)
   # create

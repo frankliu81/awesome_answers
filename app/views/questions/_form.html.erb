@@ -28,14 +28,14 @@ instance variables available in the templates (e.g. @question) %>
   the ActiveRecord object that you passed to the form.  it goes to question_path
   instead of questions_path, because we are going to a specific question.
   The action will be PATCH (using the _method wordaround).  MethodOverride
-  and hidden field _method are automatically done by Rails %>
-
-  <%# If the @question is not persisted for form_for, it will not have the pre-populated field.
-  Post for the method, action questions_path
-
+  and hidden field _method are automatically done by Rails
   If the @question is persisted, it will use the hidden path to generate a patch
   it will be question_path(@question) (ie. question_path\:id)
-   %>
+  %>
+
+  <%# If the @question is not persisted for form_for, it will not have the pre-populated fields.
+  Post would be the method, with action questions_path.  %>
+
 
 <%= form_for @question do |f| %>
   <div>
@@ -50,6 +50,16 @@ instance variables available in the templates (e.g. @question) %>
     <%= f.label :body %>
     <%= f.text_area :body %>
   </div>
+
+  <%# value get sent to server, text for display %>
+  <div>
+    <%= f.label :category %>
+    <%# collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {}) public
+     %>
+     <%# second param, method instance, what you want to save to the database %>
+     <%= f.collection_select :category_id, Category.order(:name), :id, :name %>
+  </div>
+
 
   <%= f.submit %>
 

@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/stympy/faker.git
+  revision: 983f6cd78840a77240e854020d43133e6f19af70
+  specs:
+    faker (1.6.3)
+      i18n (~> 0.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -54,8 +61,6 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
-    faker (1.6.3)
-      i18n (~> 0.5)
     ffi (1.9.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -157,7 +162,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   cowsay
-  faker
+  faker!
   hirb
   interactive_editor
   jbuilder (~> 2.0)

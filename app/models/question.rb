@@ -1,5 +1,13 @@
 class Question < ActiveRecord::Base
 
+  # when using 'has_many' you must put a symbol for the associate record in
+  # plural format# you also should provide the :dependent option which can be
+  # either:
+  # :destroy: which deletes all the associated answers when the question is deleted
+  # :nullify: which makes 'quesiton_id' NULL for all associated answers
+  has_many :answers, dependent: :destroy
+  belongs_to :category
+
   # validates_presence_of :title # deprecatead, likely removed in rails 5
 
   # full syntax
@@ -39,6 +47,8 @@ class Question < ActiveRecord::Base
   #
 
   # using scope for customize query
+  # syntactic sugar for class method
+  # http://apidock.com/rails/ActiveRecord/NamedScope/ClassMethods/scope
   scope :recent_three, lambda { order("created_at DESC").limit(3)}
 
   # customize query
