@@ -69,6 +69,14 @@ Rails.application.routes.draw do
     resources :answers, only: [:create, :destroy]
   end
 
+  resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+    #delete :destroy, on: :member # same one as the default generated
+    #delete :destroy # includes the session_id
+  end
+
   # Routes exercise
   # new (doesn't save anything, ask for a form)
   # create

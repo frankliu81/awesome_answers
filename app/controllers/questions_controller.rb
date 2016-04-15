@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
   # in the code below 'find_quesiton' will only be executed before: show, edit
   # update and destroy actions
   before_action :find_question, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, excpet: [:index, :show]
 
   def new
     # we need to define a new 'Question' object in order to be able to
@@ -44,6 +45,9 @@ class QuestionsController < ApplicationController
     #questions_params = params.require(:question).permit([:title, :body])
 
     @question = Question.new(questions_params)
+
+    # you can set user_id via object, it's recommended
+    @question.user = current_user
 
     if @question.save
       flash[:notice] = "Question created!"

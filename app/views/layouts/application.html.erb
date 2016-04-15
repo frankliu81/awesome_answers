@@ -33,8 +33,16 @@
   <%= link_to "New Question", new_question_path %>
   |
   <%= link_to "All Questions", questions_path %>
+  |
+  <% if user_signed_in? %>
+    Hello <%= current_user.first_name %>
+    <%= link_to "Log out", sessions_path, method: :delete %>
+  <% else %>
+    <%= link_to "Sign In", new_session_path %>
+    <%= link_to "Sign up", new_user_path %>
+  <% end %>
   <hr>
-  <%= puts flash[:notice] %> 
+  <%= puts flash[:notice] %>
   <%= flash[:notice] || flash[:alert] %>
   <%#= notice || alert %>
 

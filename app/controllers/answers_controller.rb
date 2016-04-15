@@ -1,5 +1,7 @@
 class AnswersController < ApplicationController
 
+  before_action :authenticate_user!
+
   def create
       # you want to make sure the question exists first before you
       # create an answer with that question
@@ -12,6 +14,9 @@ class AnswersController < ApplicationController
       @answer = Answer.new answer_params
       # this would assigns the question_id
       @answer.question = @question
+
+      # you can set user_id via object, it's recommended
+      @answer.user = current_user
 
      # render json: params
 

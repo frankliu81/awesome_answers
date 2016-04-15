@@ -7,6 +7,7 @@ class Question < ActiveRecord::Base
   # :nullify: which makes 'quesiton_id' NULL for all associated answers
   has_many :answers, dependent: :destroy
   belongs_to :category
+  belongs_to :user
 
   # validates_presence_of :title # deprecatead, likely removed in rails 5
 
@@ -37,6 +38,12 @@ class Question < ActiveRecord::Base
   after_initialize :set_defaults
 
   before_validation :titleize_title
+
+  def user_full_name
+    # if the user exists, give it a full name, otherwise
+    # return empty string to titleizing that would be ok
+    user ? user.full_name : ""
+  end
 
   private
 
