@@ -10,8 +10,11 @@ class QuestionsController < ApplicationController
   # be exectued before.
   # in the code below 'find_quesiton' will only be executed before: show, edit
   # update and destroy actions
-  before_action :find_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, excpet: [:index, :show]
+  #before_action :find_question, only: [:show, :edit, :update, :destroy]
+
+  before_action :find_question, only: [:edit, :update, :destroy, :show]
+  before_action :authorize_question, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def new
     # we need to define a new 'Question' object in order to be able to
@@ -127,6 +130,11 @@ class QuestionsController < ApplicationController
   # instance variable accessible, processed within the same request cycle
   def find_question
     @question = Question.find params[:id]
+
+  end
+
+  def authorize_question
+    redirect_to root_path unless can? :manage, @question
   end
 
   # local variable and local variable are the same
