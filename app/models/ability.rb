@@ -10,11 +10,8 @@ class Ability
     # we instantiate the user to User.new to avoid having user be nil if the user
     # is not signed in.  We assume here that 'user' wil be 'User.new' if
     # the user is not signed in.
-
     user ||= User.new
-
     # this gives superpowers
-
     puts "=============== user.admin"
     puts user.admin?
     can :manage, :all if user.admin?
