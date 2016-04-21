@@ -12,6 +12,15 @@ enforce authorization rules in the views and controllers %>
   <%= link_to "Delete", question_path(@question), method: :delete,
                                                 data: {confirm: "Are you sure?"}%>
 <% end %>
+<%# the line below is refactored out into user_like in the controller %>
+<%# like =  @question.like_for(current_user) %>
+<%# if user_signed_in? && like %>
+<% if user_like %>
+  <%= link_to "Un-like", question_like_path(@question, user_like), method: :delete %>
+<% else %>
+  <%= link_to "Like", question_likes_path(@question), method: :post %>
+<% end %>
+<%= (@question.likes.count) %>
 <hr>
 
 <%= @answer.errors.full_messages.join(", ") %>

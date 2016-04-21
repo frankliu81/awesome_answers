@@ -9,6 +9,10 @@ class Question < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
+
+  has_many :likes, dependent: :destroy
+  has_many :users,  through: :like
+
   # validates_presence_of :title # deprecatead, likely removed in rails 5
 
   # full syntax
@@ -43,6 +47,19 @@ class Question < ActiveRecord::Base
     # if the user exists, give it a full name, otherwise
     # return empty string to titleizing that would be ok
     user ? user.full_name : ""
+  end
+
+  def like_for(user)
+    # we are in a given question, we want to get the like object for a given user
+    # we are assuming only one like, if you do where there will be multiple
+    # find_by does a limit 1.  we added the uniqueness validation for like
+    # q.like_for(user)
+    # how do we get list of like for a quesitons
+    # q.likes, all the likes for taht question, filter for the user_id
+    # q.likes.find_by_user_id u
+    # likes is a local method
+    # if user to make sure you are not passed in nil to the query
+    likes.find_by_user_id user if user
   end
 
   private

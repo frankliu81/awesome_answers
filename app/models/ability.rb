@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  # CanCanCan automatically integrates with ApplicationController and it assumes
+
   # that you have a method in your ApplicationController called 'current_user'
   # you don't need to automatically create an ability object
   # we just need to learn how to write authorization rule and how to use them
@@ -32,6 +32,14 @@ class Ability
       (ans.question.user == user || ans.user == user) && user.persisted?
     end
 
+    can :like, Question do |q|
+      # prevent user from liking their own question
+      q.user != user
+    end
+
+    can :destroy, Like do |l|
+      l.user == user
+    end
 
     # Define abilities for the passed in user here. For example:
     #

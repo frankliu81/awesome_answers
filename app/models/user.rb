@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
   has_many :questions, dependent: :nullify
   has_many :answers, dependent: :nullify
 
+  has_many :likes, dependent: :destroy
+  # we're using 'source' option in here because we used 'liked_questions' instead
+  # of 'questions' (convention) because we used 'has_many :questions' earlier.
+  # inside the 'like' model there is no association called 'liked_question'
+  # so we have to specify the soruce for Tails to know how to match it
+  has_many :liked_questions, through: :likes, source: :question
 
   validates :first_name, presence: true
   validates :last_name, presence: true

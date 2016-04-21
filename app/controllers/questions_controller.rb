@@ -125,6 +125,13 @@ class QuestionsController < ApplicationController
   #   render text: "questions#show id=#{params[:id]}"
   # end
 
+  # the like object for the user and the question
+  # used in show.html.erb
+  def user_like
+    @user_like ||= @question.like_for(current_user)
+  end
+  helper_method :user_like
+
   private
 
   # instance variable accessible, processed within the same request cycle
