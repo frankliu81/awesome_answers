@@ -82,6 +82,8 @@ Rails.application.routes.draw do
     #delete :destroy # includes the session_id
   end
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
 
   # Routes exercise
   # new (doesn't save anything, ask for a form)
