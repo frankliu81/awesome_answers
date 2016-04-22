@@ -19,6 +19,10 @@ admin_user = User.create(first_name: 'Admin', last_name: 'Admin',
   Category.create(name: Faker::Hacker.adjective)
 end
 
+30.times do
+  Tag.create(name: Faker::Hipster.word)
+end
+
 all_categories = Category.all
 cateogories_count = all_categories.count
 

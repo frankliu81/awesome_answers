@@ -18,6 +18,9 @@ class Question < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :voting_users, through: :votes, source: :user
 
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
   # validates_presence_of :title # deprecatead, likely removed in rails 5
 
   # full syntax

@@ -139,13 +139,14 @@ class QuestionsController < ApplicationController
   end
 
   def authorize_question
-    redirect_to root_path unless can? :manage, @question
+    redirect_to root_path unless can? :crud, @question
   end
 
   # local variable and local variable are the same
   def questions_params
     # strong parameters, prevent user from injecting unwanted parameters
-    params.require(:question).permit(:title, :body, :category_id)
+    params.require(:question).permit(:title, :body, :category_id,
+    {tag_ids: []})
   end
 
   # the like object for the user and the question
