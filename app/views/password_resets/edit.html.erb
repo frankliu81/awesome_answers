@@ -1,0 +1,13 @@
+<h1>Enter a new password</h1>
+<%= @user.errors.full_messages.join(", ") %>
+<%= form_for @user, url: password_reset_path(@user.password_reset_token) do |f| %>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <%= f.submit %>
+<% end %>

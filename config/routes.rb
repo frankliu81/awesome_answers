@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
+  
   # this defines a route so that when we receive a GET request with url: /home
   # Rails will invoke the WelcomeController with 'index' action
   # method call get, that takes in an argument which is a hash
@@ -82,7 +86,6 @@ Rails.application.routes.draw do
     #delete :destroy # includes the session_id
   end
 
-  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
 
   # Routes exercise
