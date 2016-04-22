@@ -40,9 +40,14 @@ gem 'cowsay'
 
 gem 'faker', github: "stympy/faker"
 
+# user authorization
 gem "cancancan"
 
-gem"rails_12factor", group: :production
+# heroku deployment
+gem "rails_12factor", group: :production
+
+# keep quiet the assets print out in console
+gem "quiet_assets"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -50,7 +55,7 @@ group :development, :test do
 end
 
 group :development do
-
+  gem "letter_opener"
   gem 'interactive_editor'
   gem 'awesome_print'
   gem 'hirb'

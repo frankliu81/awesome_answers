@@ -32,6 +32,7 @@ class AnswersController <  ApplicationController
 
 
      if @answer.save
+       AnswersMailer.notify_question_owner(Answer.last).deliver_now
        redirect_to question_path(@question), notice: "Thanks for answering"
      else
        flash[:alert] = "Answer is not saved"
