@@ -11,7 +11,12 @@ class Question < ActiveRecord::Base
 
 
   has_many :likes, dependent: :destroy
-  has_many :users,  through: :like
+  #has_many :users,  through: :like
+  # to avoid confusing
+  has_many :liking_users, through: :likes, source: :user
+
+  has_many :votes, dependent: :destroy
+  has_many :voting_users, through: :votes, source: :user
 
   # validates_presence_of :title # deprecatead, likely removed in rails 5
 
@@ -58,8 +63,17 @@ class Question < ActiveRecord::Base
     # q.likes, all the likes for taht question, filter for the user_id
     # q.likes.find_by_user_id u
     # likes is a local method
-    # if user to make sure you are not passed in nil to the query
+    # if user to make sure you are not passed in nil to the
     likes.find_by_user_id user if user
+  end
+
+  def vote_for(user)
+    votes.find_by_user_id user if user
+  end
+
+  def vote_value
+    #votes.where(is_up: true).count - votes.where(is_up: false), count
+    votes.up_count - votes.down_count
   end
 
   private

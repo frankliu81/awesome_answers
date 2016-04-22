@@ -16,6 +16,10 @@ class QuestionsController < ApplicationController
   before_action :authorize_question, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
+  #include QuestionsAnswersHelper
+  # cannot use helper_method inside concerns
+  #helper_method :user_like
+
   def new
     # we need to define a new 'Question' object in order to be able to
     # properly generate a form in Rails
@@ -125,12 +129,6 @@ class QuestionsController < ApplicationController
   #   render text: "questions#show id=#{params[:id]}"
   # end
 
-  # the like object for the user and the question
-  # used in show.html.erb
-  def user_like
-    @user_like ||= @question.like_for(current_user)
-  end
-  helper_method :user_like
 
   private
 
@@ -149,5 +147,13 @@ class QuestionsController < ApplicationController
     # strong parameters, prevent user from injecting unwanted parameters
     params.require(:question).permit(:title, :body, :category_id)
   end
+
+  # the like object for the user and the question
+  # used in show.html.erb
+  # def user_like
+  #   @user_like ||= @question.like_for(current_user)
+  # end
+  # helper_method :user_like
+
 
 end

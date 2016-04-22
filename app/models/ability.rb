@@ -38,6 +38,12 @@ class Ability
     end
 
     can :destroy, Like do |l|
+      # deleting likes that are not yours
+      # the way we wrote the code, we just use the like id to
+      # destroy, instead of current_user.find, if we use admin
+      # it is harder to maintain the code
+      # if like, and inspect elemnt, questions/16/like/27, and switch to
+      # 27, and try to delete someone else's like
       l.user == user
     end
 

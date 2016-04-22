@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
   # so we have to specify the soruce for Tails to know how to match it
   has_many :liked_questions, through: :likes, source: :question
 
+  has_many :votes, dependent: :destroy
+  # source is referencing the belongs to :question in vote.rb
+  has_many :voted_questions, through: :votes, source: :question
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   #validates :email, uniqueness: true, presence: true

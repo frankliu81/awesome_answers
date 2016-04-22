@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   # this defines a route so that when we receive a GET request with url: /home
   # Rails will invoke the WelcomeController with 'index' action
   # method call get, that takes in an argument which is a hash
@@ -69,6 +70,8 @@ Rails.application.routes.draw do
     resources :answers, only: [:create, :destroy]
 
     resources :likes, only: [:create, :destroy]
+
+    resources :votes, only: [:create, :update, :destroy]
   end
 
   resources :users, only: [:new, :create]

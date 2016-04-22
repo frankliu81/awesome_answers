@@ -15,7 +15,7 @@ class LikesController < ApplicationController
       redirect_to question, notice: "Liked!"
     else
       redirect_to question, alert: "You've Already Liked!"
-  end
+    end
 
   end
 

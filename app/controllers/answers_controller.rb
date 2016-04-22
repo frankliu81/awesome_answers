@@ -1,8 +1,15 @@
-class AnswersController < ApplicationController
+class AnswersController <  ApplicationController
+
 
   before_action :authenticate_user!
   before_action :find_question
   before_action :find_and_authorize_answer, only: :destroy
+
+  #skip_before_action :authorize_question
+
+  #include QuestionsAnswersHelper
+  # cannot use helper_method inside concerns
+  #helper_method :user_like
 
   def create
       # you want to make sure the question exists first before you
