@@ -79,7 +79,11 @@ class Question < ActiveRecord::Base
     votes.up_count - votes.down_count
   end
 
-  private
+  def category_name
+    category.name if category
+  end
+
+private
 
   # same as Question.recent_three
   # def self.recent_three
@@ -139,12 +143,12 @@ class Question < ActiveRecord::Base
     # view_count = 0
   end
 
-
   def no_monkey
     if title.present? && title.downcase.include?("monkey")
       # add to error hash
       errors.add(:title, "No monkeys!")
     end
   end
+
 
 end
