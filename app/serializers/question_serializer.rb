@@ -1,6 +1,6 @@
 class QuestionSerializer < ActiveModel::Serializer
   # customize attributes to send as json
-  attributes :id, :cap_title, :creation_date
+  attributes :id, :cap_title, :creation_date, :body
   # :created_at, :updated_at,
   # assocations
   has_many :answers

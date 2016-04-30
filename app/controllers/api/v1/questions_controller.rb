@@ -10,4 +10,18 @@ class Api::V1::QuestionsController < Api::BaseController
     render json: @question
   end
 
+
+  def create
+    # still captures parameters a la Rails.
+    question_params = params.require(:question).permit(:title, :body)
+    # doesn't need to be an instance variable anymore.
+    question  = Question.new(question_params)
+    question.user = @user
+    if question.save
+      head :ok
+    else
+      render json: { errors: question.errors.full_messages}
+    end
+  end
+
 end

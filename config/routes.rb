@@ -89,7 +89,7 @@ Rails.application.routes.draw do
   # json api routes
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :questions
+      resources :questions, only: [:index, :show, :create]
     end
   end
 
