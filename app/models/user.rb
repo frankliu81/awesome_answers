@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_create :generate_api_key
+
   # has_secure_password does the following:
   # 1 - it adds attribute accessors: password and password_confirmation
   # 2 - It adds validation: password must be present on creation
@@ -70,5 +72,20 @@ class User < ActiveRecord::Base
     # return true
     password_reset_requested_at < 60.minutes.ago
   end
+
+  # options: SecureRandom.hex,
+   def generate_api_key
+     self.api_key = SecureRandom.hex(32)
+     while User.exists?(api_key: self.api_key)
+       self.api_key = SecureRandom.hex(32)
+     end
+     # begin
+     #     self.api_key = SecureRandom.hex(32)
+     # end while User.exists?(api_key: self.api_key)
+   end
+   # we call self because we want to call the actual object. if we don't do do this, we would simply be setting a variable `api_key`.
+   # IF WE WANT TO ONLY READ A VALUE, NO NEED TO CALL SELF. BUT IF WE WANT TO WRITE A VALUE, LET'S SELF IT.
+
+
 
 end
