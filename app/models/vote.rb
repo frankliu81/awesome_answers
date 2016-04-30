@@ -4,7 +4,7 @@ class Vote < ActiveRecord::Base
 
   # if the vote record doesn't exist, then there is no vote
   # but if you vote, it has to be present
-  # NOTE: do not use presence: true for true, and false
+  # NOTE: do not use presence: true, for true and false fields
   # in Ruby, false is falsy, and so is nil, so presence: true validation
   # will fail for false
   validates_inclusion_of :is_up, :in => [true, false]

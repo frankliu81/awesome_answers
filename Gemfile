@@ -48,9 +48,9 @@ gem "rails_12factor", group: :production
 
 # keep quiet the assets print out in console
 gem "quiet_assets"
-
 gem "delayed_job_active_record"
 gem "delayed_job_web"
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

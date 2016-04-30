@@ -12,9 +12,9 @@ class QuestionsController < ApplicationController
   # update and destroy actions
   #before_action :find_question, only: [:show, :edit, :update, :destroy]
 
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :find_question, only: [:edit, :update, :destroy, :show]
   before_action :authorize_question, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
 
   #include QuestionsAnswersHelper
   # cannot use helper_method inside concerns
