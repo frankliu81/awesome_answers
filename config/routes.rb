@@ -93,6 +93,17 @@ Rails.application.routes.draw do
     end
   end
 
+  # twitter oauth routes
+  # redirect to twitter asign in page
+  get "/auth/twitter", as: :sign_in_with_twitter
+  # receive the callback from Twitter, when user has authenticated our app
+  # we have the variable part :provider to allow us to use the same controller
+  # and action for differant authentication systems such as Facebook and Google
+
+  #get "/callbacks/:provider" => "callbacks#index"
+  get "/auth/twitter/callback" => "callbacks#twitter"
+
+
   # Routes exercise
   # new (doesn't save anything, ask for a form)
   # create

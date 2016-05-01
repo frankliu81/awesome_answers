@@ -50,7 +50,10 @@ gem "rails_12factor", group: :production
 gem "quiet_assets"
 gem "delayed_job_active_record"
 gem "delayed_job_web"
+# json serialization
 gem 'active_model_serializers'
+# authentication with twitter
+gem 'omniauth-twitter'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

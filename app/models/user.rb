@@ -32,7 +32,12 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   #validates :email, uniqueness: true, presence: true
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  validates :email, uniqueness: true, presence: true, format: VALID_EMAIL_REGEX
+  validates :email, uniqueness: true, presence: true, format: VALID_EMAIL_REGEX,
+            unless:   :from_omniauth?
+
+  # This will help you easier retrieve the raw twitter data back as a Hash
+  # which will make it easire to access and manipulate.
+  serialize :twitter_raw_data
 
   def full_name
     # if one of them is nil, it will throw exception
@@ -74,18 +79,43 @@ class User < ActiveRecord::Base
   end
 
   # options: SecureRandom.hex,
-   def generate_api_key
-     self.api_key = SecureRandom.hex(32)
-     while User.exists?(api_key: self.api_key)
-       self.api_key = SecureRandom.hex(32)
-     end
-     # begin
-     #     self.api_key = SecureRandom.hex(32)
-     # end while User.exists?(api_key: self.api_key)
-   end
+  def generate_api_key
+    self.api_key = SecureRandom.hex(32)
+    while User.exists?(api_key: self.api_key)
+      self.api_key = SecureRandom.hex(32)
+    end
+    # begin
+    #     self.api_key = SecureRandom.hex(32)
+    # end while User.exists?(api_key: self.api_key)
+ end
    # we call self because we want to call the actual object. if we don't do do this, we would simply be setting a variable `api_key`.
    # IF WE WANT TO ONLY READ A VALUE, NO NEED TO CALL SELF. BUT IF WE WANT TO WRITE A VALUE, LET'S SELF IT.
 
+  def from_omniauth?
+    uid.present? && provider.present?
+  end
 
+  # find_from_omniauth method will fetch the user from our database using
+  # their uid and provider if they exist and will give us back nil if the user
+  # has not signed up with Twitter before.
+  def self.find_from_omniauth(omniauth_data)
+    User.where(provider: omniauth_data["provider"],
+              uid:      omniauth_data["uid"]).first
+  end
+
+  # we can create the user account from the data we get
+  # from OmniAuth using the create_from_omniauth method.
+  def self.create_from_omniauth(omniauth_data)
+    full_name = omniauth_data["info"]["name"].split
+    User.create(uid:                      omniauth_data["uid"],
+                provider:                 omniauth_data["provider"],
+                first_name:               full_name[0],
+                last_name:                full_name[1],
+                twitter_consumer_token:   omniauth_data["credentials"]["token"],
+                twitter_consumer_secret:  omniauth_data["credentials"]["secret"],
+                twitter_raw_data:         omniauth_data,
+                password:                 SecureRandom.hex(16)
+                )
+  end
 
 end

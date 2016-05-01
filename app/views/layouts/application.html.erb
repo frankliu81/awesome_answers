@@ -40,7 +40,9 @@
     <%= link_to "Log out", sessions_path, method: :delete %>
   <% else %>
     <%= link_to "Sign In", new_session_path %>
-    | 
+    |
+    <%= link_to "Sign in with Twitter", sign_in_with_twitter_path %>
+    |
     <%= link_to "Sign up", new_user_path %>
   <% end %>
   <hr>
