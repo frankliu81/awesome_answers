@@ -1,0 +1,10 @@
+//alert("success");
+//$("p").fadeOut(5000);
+// we can render the partial, and send it as HTML
+// I am inside answer controller create in this context, i am passing
+// the instance variable @answer that I just created
+//$("#answer_body").val("");
+// re-render the form instead of clearing the body
+$("#answers").prepend("<%= j render '/answers/answer', answer:  @answer, style: 'display: none' %>");
+$("#answer-form").html("<%= j render '/answers/form', answer: Answer.new %>");
+$("#<%= dom_id(@answer)%>").slideDown(1000);
