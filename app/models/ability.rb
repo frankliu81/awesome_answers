@@ -12,8 +12,8 @@ class Ability
     # the user is not signed in.
     user ||= User.new
     # this gives superpowers
-    puts "=============== user.admin"
-    puts user.admin?
+    #puts "=============== user.admin"
+    #puts user.admin?
     can :manage, :all if user.admin?
 
     alias_action :create, :read, :udpate, :destroy, :to => :crud

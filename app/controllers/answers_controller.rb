@@ -72,9 +72,12 @@ class AnswersController <  ApplicationController
       format.html { redirect_to question_path(@question), notice: "Answer deleted!"}
       format.js { render }
     end
-
-
   end
+
+  def edit
+    @answer = Answer.find params[:id]
+  end
+
 private
   def find_question
     @question = Question.find params[:question_id]

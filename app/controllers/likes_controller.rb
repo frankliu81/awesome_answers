@@ -4,7 +4,9 @@ class LikesController < ApplicationController
   before_action :authorize_destroy, only: :destroy
   before_action :question # this will call the question method to force
                           # finding a question as we will need it for both
-                          # the create and destroy actions
+                          # the create and destroy actions when we render
+                          # the _like.html.erb partial and the user_like
+                          # in questions_helper.rb tries to access @question
 
   def create
     # question refactored below

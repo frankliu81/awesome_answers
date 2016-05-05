@@ -9,5 +9,17 @@ ActiveRecord object.  It uses the object type and its id to generate a unique id
                                   method: :delete,
                                   remote: true %>
   <% end %>
+
+  <%# if can? :edit, answer %>
+    <%= link_to "Edit", edit_question_answer_path(@question, answer),
+      remote: true,
+      data: {toggle: "modal", target: "#edit-answer"},
+      class: "btn btn-primary btn-sm"
+    %>
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#edit-answer">
+      Edit
+    </button> -->
+  <%# end %>
   <hr>
 </div>

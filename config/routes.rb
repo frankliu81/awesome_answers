@@ -71,7 +71,7 @@ Rails.application.routes.draw do
   # all the helpers will be the same as befor prefixed with 'question_'
 
   resources :questions do
-    resources :answers, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy, :edit, :update]
 
     resources :likes, only: [:create, :destroy]
 
