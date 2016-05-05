@@ -86,6 +86,12 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    respond_to do |format|
+      format.html { render }
+      # serializer will customize the select
+      # format.json { render json: @questions.select(:id, :title, :body, :view_count, :created_at)}
+      format.json { render json: @questions}
+    end
   end
 
   def edit

@@ -52,6 +52,10 @@ gem "rails_12factor", group: :production
 gem "quiet_assets"
 gem "delayed_job_active_record"
 gem "delayed_job_web"
+
+# cross-origin-resource sharing
+gem 'rack-cors', :require => 'rack/cors'
+
 # json serialization
 gem 'active_model_serializers'
 # authentication with twitter

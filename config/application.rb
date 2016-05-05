@@ -34,5 +34,23 @@ module AwesomeAnswers
     config.active_record.raise_in_transactional_callbacks = true
 
     config.active_job.queue_adapter = :delayed_job
+
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        # for simplicity
+        # origins, any website
+        # resource, any routes
+        # options is a http request to send information what are you expecting
+        # API, I expect this is the input/output
+        # setting the header is at the rack level
+        # header on the way back, doesn't have allow-origin true, you can set it
+        # manually for every request, or you can configure rack, to set this
+        # for every website and every request
+        # if you go to network, click on the quetions ajax request object
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :patch, :delete]
+      end
+    end
+
   end
 end
