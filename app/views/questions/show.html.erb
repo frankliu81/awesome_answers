@@ -3,6 +3,10 @@
 <p>View Count: <%=  @question.view_count %> </p>
 <p>Created By: <%= @question.user_full_name.titleize %></p>
 <p>Tags: <%= @question.tags.map(&:name).join(", ") %></p>
+
+<% if @question.image.present? %>
+  <%= image_tag @question.image.url, class: "full-width" %>
+<% end %>
 <!-- <p>Tags: <%#= @question.tags.map(|t| t.name).join(", ") %></p> -->
 
 <%# if @question.user == current_user %>

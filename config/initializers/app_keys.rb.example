@@ -1,2 +1,6 @@
 ENV["email_user_name"] = "PUT YOUR USERNAME HERE"
 ENV["email_password"]  = "PUT YOUR PASSWORD HERE"
+ENV["TWITTER_CONSUMER_KEY"] = "PUT TWITTER KEY"
+ENV["TWITTER_SECRET_KEY"] = PUT TWITTER SECRET"
+ENV['aws_access_key_id'] = "PUT AMAZON KEY"
+ENV['aws_secret_access_key'] = "PUT AMAZON SECRET"

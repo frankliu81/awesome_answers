@@ -42,14 +42,13 @@ instance variables available in the templates (e.g. @question) %>
   <%# you can add html class to input or label %>
   <%= f.input :title, input_html: {class: "abc"}, label_html: {class: "hey"} %>
 
-
   <%= f.input :body %>
 
   <%= f.association :category %>
 
   <%#= f.association :tags, as: :check_boxes %>
   <%= f.association :tags, input_html: {class: "chosen-select"} %>
-
+  <%= f.input :image %>
   <%= f.submit class: "btn btn-primary" %>
 
 <% end %>

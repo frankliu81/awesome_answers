@@ -157,7 +157,7 @@ class QuestionsController < ApplicationController
   def questions_params
     # strong parameters, prevent user from injecting unwanted parameters
     params.require(:question).permit(:title, :body, :category_id,
-    {tag_ids: []})
+    {tag_ids: []}, :image)
   end
 
   # the like object for the user and the question

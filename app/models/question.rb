@@ -56,7 +56,8 @@ class Question < ActiveRecord::Base
   #friendly_id :title, use: :slugged
   # allow for history of slug on update
   friendly_id :title, use: :history
-
+  mount_uploader :image, ImageUploader
+  
   def user_full_name
     # if the user exists, give it a full name, otherwise
     # return empty string to titleizing that would be ok

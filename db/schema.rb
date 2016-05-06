@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506174335) do
+ActiveRecord::Schema.define(version: 20160506181751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160506174335) do
     t.integer  "category_id"
     t.integer  "user_id"
     t.string   "slug"
+    t.string   "image"
   end
 
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree

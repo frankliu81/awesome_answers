@@ -63,6 +63,9 @@ gem 'omniauth-twitter'
 
 gem 'simple_form'
 gem 'friendly_id'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
 
 gem 'chosen-rails'
 gem 'jquery-turbolinks'
