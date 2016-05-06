@@ -14,8 +14,12 @@
 !/log/.keep
 /tmp
 
+# ignore attribute file for folder
 .DS_Store
 # ignore app_keys for email login
 /config/initializers/app_keys.rb
 # ignore secret_key for twitter api
 /config/secrets.yml
+
+# ignore carrier_wave upload folder
+/public/uploads
