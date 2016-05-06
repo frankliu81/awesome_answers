@@ -78,6 +78,24 @@ class AnswersController <  ApplicationController
     @answer = Answer.find params[:id]
   end
 
+  def update
+    @question = Question.find params[:question_id]
+    @answer = Answer.find params[:id]
+    answer_params = params.require(:answer).permit(:body)
+
+    respond_to do |format|
+      if @answer.update answer_params
+        format.html { redirect_to question_path(@question), notice: "Answer updated" }
+        format.js { render :update_success}
+      else
+        format.html { render :edit }
+        format.js { render :update_failure}
+      end
+    end
+  end
+
+
+
 private
   def find_question
     @question = Question.find params[:question_id]

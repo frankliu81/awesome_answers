@@ -1,25 +1,29 @@
-<%= @answer.errors.full_messages.join(", ") %>
+
 <%#= form_for @answer, url: question_answers_path(@question) do |f| %>
 <%# adding a remote: true option to the form makes it so that the form submits %>
 <%# with AJAX (prevent the default as well) %>
-<%= form_for [@question, @answer], remote: true do |form_helper| %>
 
 <div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title" id="myModalLabel">Edit Answer</h4>
+  <%= form_for [@question, @answer], remote: true do |form_helper| %>
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Answer</h4>
+      </div>
+      <div class="modal-body">
+          <div>
+            <%= @answer.errors.full_messages.join(", ") %>
+          </div>
+          <%= form_helper.text_area :body %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <%= form_helper.submit data: {disable_with: "submitting..."}, class: "btn btn-primary" %>
+      </div>
     </div>
-    <div class="modal-body">
-        <%= form_helper.text_area :body %>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-      <%= form_helper.submit data: {disable_with: "submitting..."}, class: "btn btn-primary" %>
-    </div>
-  </div>
+
+  <% end  %>
+
 </div>
-
-
-<% end  %>
