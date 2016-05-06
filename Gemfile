@@ -62,6 +62,7 @@ gem 'active_model_serializers'
 gem 'omniauth-twitter'
 
 gem 'simple_form'
+gem 'friendly_id'
 
 gem 'chosen-rails'
 gem 'jquery-turbolinks'

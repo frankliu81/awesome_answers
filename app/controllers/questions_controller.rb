@@ -99,7 +99,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
-
+    # reset the slug so new friendly id is generated
+    @question.slug = nil
     if @question.update questions_params
       # flash messages can be set either direclty using:
       #flash[:notice] = "..".  you can also pass a ':notice' or ':alert' options
@@ -145,8 +146,7 @@ class QuestionsController < ApplicationController
 
   # instance variable accessible, processed within the same request cycle
   def find_question
-    @question = Question.find params[:id]
-
+    @question = Question.friendly.find params[:id]
   end
 
   def authorize_question

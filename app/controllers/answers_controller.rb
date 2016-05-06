@@ -19,7 +19,7 @@ class AnswersController <  ApplicationController
       # create an answer with that question
       # find would throw an exception, and show a 4040 page
       # now in before_action
-      # @question = Question.find params[:question_id]
+      # @question = Question.friendly.find params[:question_id]
 
       # ForbiddenAttributesError
       #answer = Answer.new params[:answer]
@@ -58,7 +58,7 @@ class AnswersController <  ApplicationController
     # for question, it is question_id, for answer, it is just id
 
     # now in before_action
-    # @question = Question.find params[:question_id]
+    # @question = Question.friendly.find params[:question_id]
 
     #answer = Answer.find params[:id]
     # if you want to make sure the answer is within the question
@@ -79,7 +79,7 @@ class AnswersController <  ApplicationController
   end
 
   def update
-    @question = Question.find params[:question_id]
+    @question = Question.friendly.find params[:question_id]
     @answer = Answer.find params[:id]
     answer_params = params.require(:answer).permit(:body)
 
@@ -98,7 +98,7 @@ class AnswersController <  ApplicationController
 
 private
   def find_question
-    @question = Question.find params[:question_id]
+    @question = Question.friendly.find params[:question_id]
   end
 
   def find_and_authorize_answer

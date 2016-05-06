@@ -51,6 +51,12 @@ class Question < ActiveRecord::Base
 
   before_validation :titleize_title
 
+  # extend will add it as class methods
+  extend FriendlyId
+  #friendly_id :title, use: :slugged
+  # allow for history of slug on update
+  friendly_id :title, use: :history
+
   def user_full_name
     # if the user exists, give it a full name, otherwise
     # return empty string to titleizing that would be ok
@@ -82,6 +88,12 @@ class Question < ActiveRecord::Base
   def category_name
     category.name if category
   end
+
+  # don't use this when you have friendly_id
+  #def to_param
+  #  "#{id}-#{title}".parameterize
+  #end
+
 
 private
 
@@ -120,10 +132,12 @@ private
 
   end
 
+
   def titleize_title
     # self in this context references the object
     self.title = title.titleize
   end
+
 
   def set_defaults
 

@@ -10,7 +10,7 @@ class LikesController < ApplicationController
 
   def create
     # question refactored below
-    # question = Question.find params[:question_id]
+    # question = Question.friendly.find params[:question_id]
     like = Like.new
     like.user = current_user
     like.question = question
@@ -33,7 +33,7 @@ class LikesController < ApplicationController
   def destroy
     # permission on the question, permission on the like
     # that's why people do the separate look up
-    #question = Question.find params[:question_id]
+    #question = Question.friendly.find params[:question_id]
     # sometime may want to ensure like is within question
     #like = question.likes.find params[:id]
     # like refactored
@@ -60,7 +60,7 @@ class LikesController < ApplicationController
   end
 
   def question
-    @question ||= Question.find params[:question_id]
+    @question ||= Question.friendly.find params[:question_id]
   end
 
   def like

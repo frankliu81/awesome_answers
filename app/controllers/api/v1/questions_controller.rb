@@ -6,7 +6,7 @@ class Api::V1::QuestionsController < Api::BaseController
   end
 
   def show
-    @question  = Question.find(params[:id])
+    @question  = Question.friendly.find(params[:id])
     render json: @question
   end
 
