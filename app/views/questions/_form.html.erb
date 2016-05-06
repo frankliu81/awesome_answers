@@ -37,33 +37,18 @@ instance variables available in the templates (e.g. @question) %>
   Post would be the method, with action questions_path.  %>
 
 
-<%= form_for @question do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%# by using f.text_field :title, if @question has a value for the attributes
-    'title' it will populate the field with that value.  This is usually the
-    case when redisplaing the form after an error occurs %>
-    <%= f.text_field :title %>
-  </div>
+<%= simple_form_for @question do |f| %>
 
-  <div>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-  </div>
+  <%# you can add html class to input or label %>
+  <%= f.input :title, input_html: {class: "abc"}, label_html: {class: "hey"} %>
 
-  <%# value get sent to server, text for display %>
-  <div>
-    <%= f.label :category %>
-    <%# collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {}) public
-     %>
-     <%# second param, method instance, what you want to save to the database %>
-     <%= f.collection_select :category_id, Category.order(:name), :id, :name %>
-  </div>
 
-  <div>
-    <%= f.label :tag_ids, "Tags" %>
-    <%= f.collection_check_boxes :tag_ids, Tag.order(:name), :id, :name %>
-  </div>
+  <%= f.input :body %>
+
+  <%= f.association :category %>
+
+  <%#= f.association :tags, as: :check_boxes %>
+  <%= f.association :tags, input_html: {class: "chosen-select"} %>
 
   <%= f.submit class: "btn btn-primary" %>
 

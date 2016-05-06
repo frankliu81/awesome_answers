@@ -61,6 +61,11 @@ gem 'active_model_serializers'
 # authentication with twitter
 gem 'omniauth-twitter'
 
+gem 'simple_form'
+
+gem 'chosen-rails'
+gem 'jquery-turbolinks'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
