@@ -16,7 +16,7 @@ class Ability
     #puts user.admin?
     can :manage, :all if user.admin?
 
-    alias_action :create, :read, :udpate, :destroy, :to => :crud
+    alias_action :create, :read, :edit, :udpate, :destroy, :to => :crud
     # defining the ability to :manage (do anything) with a question
     # in the case below we put inside the block an expression that will return
     # true or false.  This will determine whether the user is allowed to manage

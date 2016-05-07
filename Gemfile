@@ -53,8 +53,7 @@ gem "quiet_assets"
 gem "delayed_job_active_record"
 gem "delayed_job_web"
 
-# cross-origin-resource sharing
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', :require => 'rack/cors' # cross-origin-resource sharing
 
 # json serialization
 gem 'active_model_serializers'
@@ -62,10 +61,10 @@ gem 'active_model_serializers'
 gem 'omniauth-twitter'
 
 gem 'simple_form'
-gem 'friendly_id'
-gem 'carrierwave'
-gem 'mini_magick'
-gem 'fog'
+gem 'friendly_id' # friendly id for URL
+gem 'carrierwave' # upload image
+gem 'mini_magick' # image size
+gem 'fog'        
 
 gem 'chosen-rails'
 gem 'jquery-turbolinks'
